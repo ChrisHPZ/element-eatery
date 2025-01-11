@@ -1,5 +1,4 @@
 <?php
-
 // Defines
 define( 'FL_CHILD_THEME_DIR', get_stylesheet_directory() );
 define( 'FL_CHILD_THEME_URL', get_stylesheet_directory_uri() );
@@ -10,6 +9,11 @@ require_once 'classes/class-fl-child-theme.php';
 // Actions
 add_action( 'wp_enqueue_scripts', 'FLChildTheme::enqueue_scripts', 1000 );
 
+function bb_child_theme_assets() {
+  wp_enqueue_style( 'minified-styles', get_stylesheet_directory_uri() . '/dist/style.css', '', '1.0' );
+  wp_enqueue_script( 'minified-scripts', get_stylesheet_directory_uri() . '/dist/scripts.js', array( 'jquery' ), '1.0', true );
+}
+add_action( 'wp_enqueue_scripts', 'bb_child_theme_assets' );
 function create_specials_post_type() {
   
   register_post_type( 'specials',
